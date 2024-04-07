@@ -1,0 +1,127 @@
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<div id="whr-boxplot"></div>
+
+<script>
+
+// Set the dimensions and margins of the graph
+var margin = {top: 30, right: 30, bottom: 150, left: 70},
+    width = 1400 - margin.left - margin.right,
+    height = 500 - margin.top;
+
+// Append the SVG object to the body of the page
+var svg = d3.select("#whr-boxplot")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// Read the data and compute summary statistics for each region
+d3.csv("world-happiness-report-2021.csv", function(data) {
+
+  // Compute quartiles, median, interquartile range min and max
+  var sumstat = d3.nest()
+    .key(function(d) { return d['Regional indicator']; })
+    .rollup(function(d) {
+      q1 = d3.quantile(d.map(function(g) { return +g['Ladder score']; }).sort(d3.ascending), .25);
+      median = d3.quantile(d.map(function(g) { return +g['Ladder score']; }).sort(d3.ascending), .5);
+      q3 = d3.quantile(d.map(function(g) { return +g['Ladder score']; }).sort(d3.ascending), .75);
+      interQuantileRange = q3 - q1;
+      min = q1 - 1.5 * interQuantileRange;
+      max = q3 + 1.5 * interQuantileRange;
+      return { q1: q1, median: median, q3: q3, interQuantileRange: interQuantileRange, min: min, max: max };
+    })
+    .entries(data);
+
+  // Show the X scale
+  var x = d3.scaleBand()
+    .range([0, width])
+    .domain(sumstat.map(function(d) { return d.key; }))
+    .paddingInner(0.1)
+    .paddingOuter(0.2);
+
+  // Calculate the bandwidth of the x scale
+  var bandwidth = x.bandwidth();
+
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+    .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em")
+      .attr("transform", "rotate(-45)");
+
+  // Show the Y scale
+  var y = d3.scaleLinear()
+    .domain([0, d3.max(sumstat, function(d) { return d.value.max; })])
+    .range([height, 0]);
+  svg.append("g").call(d3.axisLeft(y));
+
+  // Add titles
+  svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", 0 - (margin.top / 2))
+    .attr("text-anchor", "middle")
+    .style("font-size", "16px")
+    .text("Ladder/Happiness Scores by Region");
+
+  // Add axis names
+  svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x", 0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .style("font-size", "14px")
+    .text("Ladder Score");
+
+  svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", height + margin.bottom - 20)
+    .style("text-anchor", "middle")
+    .style("font-size", "14px")
+    .text("Regional Indicator");
+
+  // Show the main vertical lines
+  svg.selectAll("vertLines")
+    .data(sumstat)
+    .enter()
+    .append("line")
+      .attr("x1", function(d) { return x(d.key) + bandwidth / 2; }) 
+      .attr("x2", function(d) { return x(d.key) + bandwidth / 2; })
+      .attr("y1", function(d) { return y(d.value.min); })
+      .attr("y2", function(d) { return y(d.value.max); })
+      .attr("stroke", "black")
+      .style("width", 40);
+
+  // Rectangle for the main box
+  var boxWidth = bandwidth * 0.8; // Adjust box width to fit within bandwidth
+  svg.selectAll("boxes")
+    .data(sumstat)
+    .enter()
+    .append("rect")
+      .attr("x", function(d) { return x(d.key) + bandwidth / 2 - boxWidth / 2; }) 
+      .attr("y", function(d) { return y(d.value.q3); })
+      .attr("height", function(d) { return y(d.value.q1) - y(d.value.q3); })
+      .attr("width", boxWidth)
+      .attr("stroke", "black")
+      .style("fill", "#69b3a2");
+
+  // Show the median
+  svg.selectAll("medianLines")
+    .data(sumstat)
+    .enter()
+    .append("line")
+      .attr("x1", function(d) { return x(d.key) + bandwidth / 2 - boxWidth / 2; }) 
+      .attr("x2", function(d) { return x(d.key) + bandwidth / 2 + boxWidth / 2; })
+      .attr("y1", function(d) { return y(d.value.median); })
+      .attr("y2", function(d) { return y(d.value.median); })
+      .attr("stroke", "black")
+      .style("width", 80);
+});
+
+</script>
