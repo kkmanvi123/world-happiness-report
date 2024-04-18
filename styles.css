@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.country {
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+}
+
+.hidden {
+    display: none;
+}

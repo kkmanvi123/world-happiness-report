@@ -1,127 +1,92 @@
-<!-- Load d3.js -->
-<script src="https://d3js.org/d3.v4.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Makes the World A Better Place? Explore the World Happiness Report 2021</title>
+    <!-- Add any CSS files or stylesheets here -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>What Makes the World A Better Place? Explore the World Happiness Report 2021</h1>
+        <nav>
+            <!-- Add navigation links here if needed -->
+        </nav>
+    </header>
 
-<!-- Create a div where the graph will take place -->
-<div id="whr-boxplot"></div>
+    <section id="introduction">
+        <h2>Introduction</h2>
+        <p>The World Happiness Report, collected by partnerships of Gallup, 
+            Oxford Wellbeing Research Center, Un Sustainable Development Solutions
+             Network and the WHRs Editorial Board reflect on the worldwide demand 
+             for more attention to happiness and the relation to government policy. 
+             The Report reviews the state of happiness in the world today and explores 
+             the science of happiness and provides explanations to personal and national 
+             variations in happiness. This topic is highly important on an international level 
+             with the UN attention within development goals, specifically Resolution 65/309 “Happiness: 
+             Towards a holistic approach to development” which was adopted by the General Assembly of the 
+             United Nations on July 19th 2011.</p>
+    </section>
 
-<script>
+    <section id="overall-visualization">
+        <h2>Overall Data Visualization</h2>
+        <!-- Add your overall data visualization here -->
+        <div id="overall-chart">
+            <!-- Placeholder for the visualization -->
+        </div>
+        <p>overall data viz, title, labels, legend, paragraph to introduce data, size, source, attributes</p>
+    </section>
 
-// Set the dimensions and margins of the graph
-var margin = {top: 30, right: 30, bottom: 150, left: 70},
-    width = 1400 - margin.left - margin.right,
-    height = 500 - margin.top;
+    <section id="references">
+        <h2>References</h2>
+        <!-- Add links to your references here -->
+        <ul>
+            <li><a href="#">Reference 1</a></li>
+            <li><a href="#">Reference 2</a></li>
+        </ul>
+    </section>
 
-// Append the SVG object to the body of the page
-var svg = d3.select("#whr-boxplot")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    <!-- More sections for static and interactive visualizations, summary, etc. -->
 
-// Read the data and compute summary statistics for each region
-d3.csv("world-happiness-report-2021.csv", function(data) {
+    <section id="static-visualization">
+        <h2>Static Data Visualization</h2>
+        <!-- Add your overall data visualization here -->
+        <div id="static-chart">
+            <!-- Placeholder for the visualization -->
+        </div>
+        <p>three static, title, labels, legend, explain takeaway </p>
+        
+        <!-- Embed your D3 visualization HTML file using an iframe -->
+        <iframe src="scatterplot.html" width="100%" height="400px" frameborder="0"></iframe>
+        <iframe src="heatmap_with_text.html" width="100%" height="400px" frameborder="0"></iframe>
+        <iframe src="d3.html" width="100%" height="400px" frameborder="0"></iframe>
+    </section>
 
-  // Compute quartiles, median, interquartile range min and max
-  var sumstat = d3.nest()
-    .key(function(d) { return d['Regional indicator']; })
-    .rollup(function(d) {
-      q1 = d3.quantile(d.map(function(g) { return +g['Ladder score']; }).sort(d3.ascending), .25);
-      median = d3.quantile(d.map(function(g) { return +g['Ladder score']; }).sort(d3.ascending), .5);
-      q3 = d3.quantile(d.map(function(g) { return +g['Ladder score']; }).sort(d3.ascending), .75);
-      interQuantileRange = q3 - q1;
-      min = q1 - 1.5 * interQuantileRange;
-      max = q3 + 1.5 * interQuantileRange;
-      return { q1: q1, median: median, q3: q3, interQuantileRange: interQuantileRange, min: min, max: max };
-    })
-    .entries(data);
+    <section id="interactive-visualization">
+        <h2>Interactive Data Visualization</h2>
+        <!-- Add your overall data visualization here -->
+        <div id="interactive-chart">
+            <!-- Placeholder for the visualization -->
+        </div>
+        <p>two interactive viz, title, labels legend, explain how to interact</p>
+        <iframe src="dropdown_viz.html" width="100%" height="600px" frameborder="0"></iframe>
+        
 
-  // Show the X scale
-  var x = d3.scaleBand()
-    .range([0, width])
-    .domain(sumstat.map(function(d) { return d.key; }))
-    .paddingInner(0.1)
-    .paddingOuter(0.2);
+    </section>
 
-  // Calculate the bandwidth of the x scale
-  var bandwidth = x.bandwidth();
+    <section id="summary">
+        <h2>Overall Data Visualization</h2>
+        <!-- Add your overall data visualization here -->
+        
+        <p>Summary of findings, what we have learned from data, what can be done in the future</p>
+    </section>
 
-  svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x))
-    .selectAll("text")
-      .style("text-anchor", "end")
-      .attr("dx", "-.8em")
-      .attr("dy", ".15em")
-      .attr("transform", "rotate(-45)");
+    <footer>
+        <p>&copy; 2024 Your Group Name</p>
+    </footer>
 
-  // Show the Y scale
-  var y = d3.scaleLinear()
-    .domain([0, d3.max(sumstat, function(d) { return d.value.max; })])
-    .range([height, 0]);
-  svg.append("g").call(d3.axisLeft(y));
-
-  // Add titles
-  svg.append("text")
-    .attr("x", width / 2)
-    .attr("y", 0 - (margin.top / 2))
-    .attr("text-anchor", "middle")
-    .style("font-size", "16px")
-    .text("Ladder/Happiness Scores by Region");
-
-  // Add axis names
-  svg.append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 0 - margin.left)
-    .attr("x", 0 - (height / 2))
-    .attr("dy", "1em")
-    .style("text-anchor", "middle")
-    .style("font-size", "14px")
-    .text("Ladder Score");
-
-  svg.append("text")
-    .attr("x", width / 2)
-    .attr("y", height + margin.bottom - 20)
-    .style("text-anchor", "middle")
-    .style("font-size", "14px")
-    .text("Regional Indicator");
-
-  // Show the main vertical lines
-  svg.selectAll("vertLines")
-    .data(sumstat)
-    .enter()
-    .append("line")
-      .attr("x1", function(d) { return x(d.key) + bandwidth / 2; }) 
-      .attr("x2", function(d) { return x(d.key) + bandwidth / 2; })
-      .attr("y1", function(d) { return y(d.value.min); })
-      .attr("y2", function(d) { return y(d.value.max); })
-      .attr("stroke", "black")
-      .style("width", 40);
-
-  // Rectangle for the main box
-  var boxWidth = bandwidth * 0.8; // Adjust box width to fit within bandwidth
-  svg.selectAll("boxes")
-    .data(sumstat)
-    .enter()
-    .append("rect")
-      .attr("x", function(d) { return x(d.key) + bandwidth / 2 - boxWidth / 2; }) 
-      .attr("y", function(d) { return y(d.value.q3); })
-      .attr("height", function(d) { return y(d.value.q1) - y(d.value.q3); })
-      .attr("width", boxWidth)
-      .attr("stroke", "black")
-      .style("fill", "#69b3a2");
-
-  // Show the median
-  svg.selectAll("medianLines")
-    .data(sumstat)
-    .enter()
-    .append("line")
-      .attr("x1", function(d) { return x(d.key) + bandwidth / 2 - boxWidth / 2; }) 
-      .attr("x2", function(d) { return x(d.key) + bandwidth / 2 + boxWidth / 2; })
-      .attr("y1", function(d) { return y(d.value.median); })
-      .attr("y2", function(d) { return y(d.value.median); })
-      .attr("stroke", "black")
-      .style("width", 80);
-});
-
-</script>
+    <!-- Add any JavaScript files or scripts here -->
+    <script src="scripts.js"></script>
+</body>
+</html>
