@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Makes the World A Better Place? Explore the World Happiness Report 2021</title>
+    <!-- Add any CSS files or stylesheets here -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>What Makes the World A Better Place? Explore the World Happiness Report 2021</h1>
+        <nav>
+            <!-- Add navigation links here if needed -->
+        </nav>
+    </header>
+
+    <section id="introduction">
+        <h2>Introduction</h2>
+        <p>The World Happiness Report, collected by partnerships of Gallup, 
+            Oxford Wellbeing Research Center, Un Sustainable Development Solutions
+             Network and the WHRs Editorial Board reflect on the worldwide demand 
+             for more attention to happiness and the relation to government policy. 
+             The Report reviews the state of happiness in the world today and explores 
+             the science of happiness and provides explanations to personal and national 
+             variations in happiness. This topic is highly important on an international level 
+             with the UN attention within development goals, specifically Resolution 65/309 “Happiness: 
+             Towards a holistic approach to development” which was adopted by the General Assembly of the 
+             United Nations on July 19th 2011.</p>
+    </section>
+
+    <section id="overall-visualization">
+        <h2>Overall Data Visualization</h2>
+        <!-- Add your overall data visualization here -->
+        <div id="overall-chart">
+            <!-- Placeholder for the visualization -->
+        </div>
+        <iframe src="d3.html" width="100%" height="700px" frameborder="0"></iframe>
+        <p>overall data viz, title, labels, legend, paragraph to introduce data, size, source, attributes</p>
+    </section>
+
+    <section id="references">
+        <h2>References</h2>
+        <!-- Add links to your references here -->
+        <ul>
+            <li><a href="#">Reference 1</a></li>
+            <li><a href="#">Reference 2</a></li>
+        </ul>
+    </section>
+
+    <!-- More sections for static and interactive visualizations, summary, etc. -->
+
+    <section id="static-visualization">
+        <h2>Static Data Visualization</h2>
+        <!-- Add your overall data visualization here -->
+        <div id="static-chart">
+            <!-- Placeholder for the visualization -->
+        </div>
+        <p>three static, title, labels, legend, explain takeaway </p>
+        
+        <!-- Embed your D3 visualization HTML file using an iframe -->
+        <iframe src="scatterplot.html" width="100%" height="400px" frameborder="0"></iframe>
+        <p>This scatter plot visualizes the relationship between logged GDP per capita and healthy life expectancy based on 
+          data from the World Happiness Report. The x-axis represents the logged GDP per capita values, while the y-axis shows 
+          the healthy life expectancy in years. Each blue dot on the plot represents a country or region, with its position 
+          determined by its corresponding logged GDP per capita and healthy life expectancy values. The overall pattern 
+          suggests a positive correlation between the two variables, meaning that countries with higher GDP per capita tend 
+          to have higher healthy life expectancy. However, the data points are scattered, indicating that the relationship is 
+          not perfectly linear. There is considerable variation, with some countries deviating from the general trend. For 
+          instance, some countries with relatively lower GDP per capita have surprisingly high healthy life expectancy, 
+          while others with higher GDP per capita have lower healthy life expectancy than expected. The plot also includes a 
+          ladder score legend on the right side, representing happiness or well-being as measured by the World Happiness Report. 
+          This additional information could provide further context for interpreting the relationship between economic prosperity 
+          and health outcomes across different countries or regions. Overall, this scatter plot effectively visualizes the 
+          general positive correlation between GDP per capita and healthy life expectancy while also highlighting the variations 
+          and potential outliers in the data.</p>
+
+        <iframe src="heatmap_with_text.html" width="100%" height="400px" frameborder="0"></iframe> 
+        <p>Above is a correlation heatmap from the World Happiness Report, showing the relationships between 
+          various factors and their impact on happiness or life satisfaction. The heatmap uses different shades of blue 
+          to represent the strength and direction of the correlations between the factors. Darker shades indicate stronger 
+          positive correlations, while lighter shades indicate weaker or negative correlations. One key takeaway from the 
+          heatmap is the strong positive correlation between healthy life expectancy, logged GDP per capita, and overall 
+          happiness or life satisfaction. Countries with higher GDP per capita and longer healthy life expectancy tend to have 
+          higher levels of reported happiness or life satisfaction. Another notable observation is the negative correlation 
+          between perceptions of corruption and happiness or life satisfaction. Countries with higher perceived levels of 
+          corruption tend to have lower levels of reported happiness or life satisfaction. Additionally, the heatmap shows 
+          that factors like freedom to make life choices, generosity, and social support are positively correlated with 
+          happiness or life satisfaction. Promoting personal freedoms, fostering a culture of generosity, and strengthening 
+          social support networks can contribute to improved well-being and life satisfaction. Overall, the correlation heatmap 
+          provides valuable insights into the interplay between various socioeconomic, health, and societal factors and their 
+          influence on subjective well-being and happiness across different countries or regions.</p>
+
+        <iframe src="radarchart.html" width="100%" height="400px" frameborder="0"></iframe>
+        <p>This radar chart compares various regions on multiple indicators related to happiness and well-being from the World 
+          Happiness Report. The regions are represented along the radial axes, while the different metrics are depicted using 
+          colored markers. The colored markers, as per the legend, correspond to indicators like ladder score, logged GDP per 
+          capita, social support, healthy life expectancy, freedom to make life choices, generosity, and perceptions of 
+          corruption. For each region, the distance from the center to the marker indicates the score or value for that specific 
+          indicator. Regions with markers closer to the outer edge perform better on those metrics, while those closer to the center 
+          have lower scores. By examining the shapes formed by connecting the markers for each region, one can visually assess 
+          the relative strengths and weaknesses across different factors contributing to happiness. For instance, Western Europe 
+          scores highly on aspects like healthy life expectancy, GDP per capita, and social support but relatively lower on 
+          perceptions of corruption. Conversely, Sub-Saharan Africa has lower scores across most indicators compared to other 
+          regions. This radar chart effectively condenses a multitude of data points into an easily interpretable visual format, 
+          enabling quick comparisons of regional performance on various happiness indicators. It highlights areas where targeted 
+          interventions may be required to improve overall well-being in different parts of the world.</p>
+    </section>
+
+    <section id="interactive-visualization">
+        <h2>Interactive Data Visualization</h2>
+        <!-- Add your overall data visualization here -->
+        <div id="interactive-chart">
+            <!-- Placeholder for the visualization -->
+        </div>
+        <p>two interactive viz, title, labels legend, explain how to interact</p>
+        <iframe src="dropdown_viz.html" width="100%" height="600px" frameborder="0"></iframe>
+        <p>This is an interactive visualization that displays geographical data related to the World Happiness Report. The 
+          visualization allows users to select and view different indicators or factors that contribute to overall happiness 
+          and well-being across countries and regions. These interactive maps enable users to explore and compare different 
+          factors that influence happiness across the globe. By selecting different indicators from the dropdown menu, users 
+          can gain insights into how factors like GDP per capita, healthy life expectancy, freedom to make life choices, and 
+          perceptions of corruption vary among countries and regions. For example, when the selected indicator is "Social 
+          Support," the map is colored in shades, with darker shades representing higher levels of social support. North 
+          America and Western Europe appear to have the highest levels of social support, while regions like Africa and parts 
+          of Asia have lower levels. When you select "Ladder score," you can see that Western Europe, North America, Australia, 
+          and New Zealand exhibit the highest ladder scores, indicating higher levels of happiness or well-being. In contrast, 
+          several countries in Africa and parts of Asia have lower ladder scores. This type of interactive visualization is 
+          valuable for understanding the multidimensional nature of happiness and well-being. It allows users to identify 
+          patterns, hotspots, and potential areas of concern, which can inform policymaking and targeted interventions to 
+          improve the overall quality of life for people around the world.</p>
+        
+        <p>BELLOW IS SANKEY</p>
+        <label for="region-select">Select Region:</label>
+        <select id="region-select">
+            <option value="Western_Europe">Western Europe</option>
+            <option value="North_America_and_ANZ">North America and ANZ</option>
+            <option value="Middle_East_and_North_Africa">Middle East and North Africa</option>
+            <option value="Latin_America_and_Caribbean">Latin America and Caribbean</option>
+            <option value="Central_and_Eastern_Europe">Central and Eastern Europe</option>
+            <option value="East_Asia">East Asia</option>
+            <option value="Southeast_Asia">Southeast Asia</option>
+            <option value="Commonwealth_of_Independent_States">Commonwealth of Independent States</option>
+            <option value="Sub-Saharan_Africa">Sub-Saharan Africa</option>
+            <option value="South_Asia">South Asia</option>
+        </select>
+        
+        <!-- Container for Sankey diagram -->
+        <div id="sankey-container">
+            <iframe id="sankey-iframe" src="" width="100%" height="600px" frameborder="0"></iframe>
+        </div>
+
+    </section>
+
+    <section id="summary">
+        <h2>Summary</h2>
+        <!-- Add your overall data visualization here -->
+        
+        <p>Our analysis of the World Happiness Report 2021 data has uncovered insightful findings regarding the factors that contribute to happiness and well-being globally. We observed a positive correlation between economic prosperity, as indicated by GDP per capita, and better health outcomes, reflected in higher healthy life expectancies. This correlation suggests that countries with stronger economies often experience improved overall well-being. Additionally, our analysis highlighted the significant influence of social and governance factors on happiness levels. Regions such as Western Europe exhibited strengths in social support systems and economic indicators, while also facing challenges related to perceptions of corruption. Conversely, regions like Sub-Saharan Africa showed lower GDP per capita and social support levels, indicating areas needing targeted interventions to enhance well-being. Our key learnings underscored the interconnectedness of these factors and emphasized the importance of holistic approaches to policymaking and interventions.</p>
+        <p>Moving forward, these findings have practical implications for policymakers, researchers, and communities. Policymakers can use these insights to formulate evidence-based policies that promote economic growth alongside robust social support systems, personal freedoms, and transparent governance. Targeted interventions tailored to specific regional strengths and weaknesses can lead to more effective improvements in well-being outcomes. Longitudinal studies and ongoing data analysis are crucial for tracking progress, identifying trends, and assessing the impact of interventions over time. Community engagement and stakeholder involvement are essential in fostering awareness, advocacy, and collaborative efforts toward creating environments that support happiness and quality of life for all. By leveraging these insights and taking proactive actions, we can work towards a more equitable and fulfilling future for individuals and communities worldwide.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Sarah Klute and Manvi Kottakota</p>
+    </footer>
+
+    <!-- Add any JavaScript files or scripts here -->
+    <script>
+        // Function to update Sankey diagram based on selected region
+        function updateSankeyDiagram(region) {
+            const filename = `sankey_${region.replace(' ', '_')}.html`; // Construct filename based on region
+            const iframe = document.getElementById('sankey-iframe');
+            iframe.src = filename; // Set iframe src attribute to load corresponding HTML file
+        }
+
+        // Event listener for dropdown change
+        document.getElementById('region-select').addEventListener('change', function() {
+            const selectedRegion = this.value;
+            updateSankeyDiagram(selectedRegion);
+        });
+
+        // Initialize Sankey diagram with default selected region
+        updateSankeyDiagram('Western_Europe'); // Default region
+    </script>
+</body>
+</html>
